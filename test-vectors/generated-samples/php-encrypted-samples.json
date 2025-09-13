@@ -1,0 +1,236 @@
+{
+  "metadata": {
+    "generated": "2024-01-15T10:00:00Z",
+    "version": "1.0.0",
+    "description": "Cross-language compatibility test vectors for encryption package",
+    "languages": ["javascript", "php", "python"],
+    "algorithm": "AES-256-GCM",
+    "kdf": "PBKDF2-SHA256"
+  },
+  "test_vectors": [
+    {
+      "id": "basic_string",
+      "description": "Simple ASCII string",
+      "input": {
+        "data": "Hello World",
+        "password": "password123",
+        "options": {
+          "iterations": 10000
+        }
+      },
+      "expected_structure": {
+        "v": "1.0.0",
+        "alg": "AES-256-GCM", 
+        "kdf": "PBKDF2-SHA256",
+        "iter": 10000,
+        "field_lengths": {
+          "iv": 16,
+          "salt": 24,
+          "tag": 24,
+          "data": "variable"
+        }
+      }
+    },
+    {
+      "id": "json_data",
+      "description": "JSON payload",
+      "input": {
+        "data": "{\"user\": \"john\", \"id\": 12345, \"active\": true}",
+        "password": "secret-key-456",
+        "options": {
+          "iterations": 15000
+        }
+      },
+      "expected_structure": {
+        "v": "1.0.0",
+        "alg": "AES-256-GCM",
+        "kdf": "PBKDF2-SHA256", 
+        "iter": 15000,
+        "field_lengths": {
+          "iv": 16,
+          "salt": 24,
+          "tag": 24,
+          "data": "variable"
+        }
+      }
+    },
+    {
+      "id": "unicode_characters",
+      "description": "Unicode and emoji characters",
+      "input": {
+        "data": "Test with ëmöjï 🔐 and ñ characters 中文",
+        "password": "ünïçødé-päss",
+        "options": {
+          "iterations": 12000
+        }
+      },
+      "expected_structure": {
+        "v": "1.0.0",
+        "alg": "AES-256-GCM",
+        "kdf": "PBKDF2-SHA256",
+        "iter": 12000,
+        "field_lengths": {
+          "iv": 16,
+          "salt": 24, 
+          "tag": 24,
+          "data": "variable"
+        }
+      }
+    },
+    {
+      "id": "multiline_text",
+      "description": "Text with newlines and special characters",
+      "input": {
+        "data": "Line 1\nLine 2\nSpecial: !@#$%^&*()\nEnd",
+        "password": "multiline-test-key",
+        "options": {
+          "iterations": 25000
+        }
+      },
+      "expected_structure": {
+        "v": "1.0.0",
+        "alg": "AES-256-GCM",
+        "kdf": "PBKDF2-SHA256",
+        "iter": 25000,
+        "field_lengths": {
+          "iv": 16,
+          "salt": 24,
+          "tag": 24,
+          "data": "variable"
+        }
+      }
+    },
+    {
+      "id": "long_text",
+      "description": "Longer text payload (1KB+)",
+      "input": {
+        "data": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
+        "password": "long-text-password-key",
+        "options": {
+          "iterations": 50000
+        }
+      },
+      "expected_structure": {
+        "v": "1.0.0",
+        "alg": "AES-256-GCM",
+        "kdf": "PBKDF2-SHA256",
+        "iter": 50000,
+        "field_lengths": {
+          "iv": 16,
+          "salt": 24,
+          "tag": 24,
+          "data": "variable"
+        }
+      }
+    },
+    {
+      "id": "custom_options",
+      "description": "Custom encryption parameters",
+      "input": {
+        "data": "Custom options test data",
+        "password": "custom-options-key",
+        "options": {
+          "iterations": 75000,
+          "keyLength": 32,
+          "ivLength": 12,
+          "saltLength": 16,
+          "tagLength": 16
+        }
+      },
+      "expected_structure": {
+        "v": "1.0.0",
+        "alg": "AES-256-GCM",
+        "kdf": "PBKDF2-SHA256",
+        "iter": 75000,
+        "field_lengths": {
+          "iv": 16,
+          "salt": 24,
+          "tag": 24,
+          "data": "variable"
+        }
+      }
+    }
+  ],
+  "compatibility_tests": [
+    {
+      "id": "js_to_php",
+      "description": "Encrypt in JavaScript, decrypt in PHP",
+      "test_vector_id": "basic_string"
+    },
+    {
+      "id": "php_to_python", 
+      "description": "Encrypt in PHP, decrypt in Python",
+      "test_vector_id": "json_data"
+    },
+    {
+      "id": "python_to_js",
+      "description": "Encrypt in Python, decrypt in JavaScript",
+      "test_vector_id": "unicode_characters"
+    },
+    {
+      "id": "round_trip",
+      "description": "JS → PHP → Python → JS round trip",
+      "test_vector_id": "multiline_text"
+    }
+  ],
+  "validation_rules": {
+    "structure_validation": {
+      "required_fields": ["v", "alg", "kdf", "iter", "iv", "salt", "tag", "data"],
+      "version": "1.0.0",
+      "algorithm": "AES-256-GCM",
+      "kdf": "PBKDF2-SHA256"
+    },
+    "field_validation": {
+      "iv_length": 12,
+      "salt_length": 16, 
+      "tag_length": 16,
+      "min_iterations": 10000
+    },
+    "encoding_validation": {
+      "json_encoding": "UTF-8",
+      "base64_encoding": "standard",
+      "field_encoding": "base64"
+    }
+  },
+  "error_test_cases": [
+    {
+      "id": "empty_data",
+      "description": "Empty data should fail",
+      "input": {
+        "data": "",
+        "password": "password123"
+      },
+      "expected_error": "Data must be a non-empty string"
+    },
+    {
+      "id": "empty_password",
+      "description": "Empty password should fail",
+      "input": {
+        "data": "test data",
+        "password": ""
+      },
+      "expected_error": "Password must be a non-empty string"
+    },
+    {
+      "id": "wrong_password",
+      "description": "Wrong decryption password should fail",
+      "encrypt_password": "correct-password",
+      "decrypt_password": "wrong-password",
+      "data": "test data",
+      "expected_error": "Decryption failed"
+    },
+    {
+      "id": "invalid_encrypted_data",
+      "description": "Invalid base64 data should fail",
+      "encrypted_data": "invalid-base64-data-here",
+      "password": "password123",
+      "expected_error": "Invalid encrypted data format"
+    },
+    {
+      "id": "corrupted_data",
+      "description": "Corrupted encrypted data should fail",
+      "note": "Take valid encrypted data and modify last few characters",
+      "expected_error": "Decryption failed"
+    }
+  ]
+}

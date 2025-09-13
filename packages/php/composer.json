@@ -1,0 +1,16 @@
+{
+  "name": "maat/maat-cross-lang-crypto",
+  "description": "Cross-language encryption package for PHP",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "@MAAT\\Crypto\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.4",
+    "ext-openssl": "*",
+    "ext-json": "*"
+  }
+}

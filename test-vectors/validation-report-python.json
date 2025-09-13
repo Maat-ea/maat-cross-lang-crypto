@@ -1,0 +1,105 @@
+{
+  "timestamp": "2025-09-13T14:29:26.234747",
+  "implementation": "python",
+  "test_vectors_version": "1.0.0",
+  "summary": {
+    "total_tests": 8,
+    "passed": 8,
+    "failed": 0,
+    "success_rate": "100.0%"
+  },
+  "details": [
+    {
+      "id": "basic_string",
+      "success": true,
+      "error": null,
+      "details": {
+        "encrypted_length": 248,
+        "original_length": 11,
+        "structure_valid": true,
+        "wrong_password_rejected": true
+      }
+    },
+    {
+      "id": "json_payload",
+      "success": true,
+      "error": null,
+      "details": {
+        "encrypted_length": 360,
+        "original_length": 73,
+        "structure_valid": true,
+        "wrong_password_rejected": true
+      }
+    },
+    {
+      "id": "unicode_characters",
+      "success": true,
+      "error": null,
+      "details": {
+        "encrypted_length": 364,
+        "original_length": 53,
+        "structure_valid": true,
+        "wrong_password_rejected": true
+      }
+    },
+    {
+      "id": "multiline_text",
+      "success": true,
+      "error": null,
+      "details": {
+        "encrypted_length": 484,
+        "original_length": 144,
+        "structure_valid": true,
+        "wrong_password_rejected": true
+      }
+    },
+    {
+      "id": "large_payload",
+      "success": true,
+      "error": null,
+      "details": {
+        "encrypted_length": 2028,
+        "original_length": 1013,
+        "structure_valid": true,
+        "wrong_password_rejected": true
+      }
+    },
+    {
+      "id": "custom_iterations",
+      "success": true,
+      "error": null,
+      "details": {
+        "encrypted_length": 272,
+        "original_length": 23,
+        "structure_valid": true,
+        "wrong_password_rejected": true
+      }
+    },
+    {
+      "id": "minimal_data",
+      "success": true,
+      "error": null,
+      "details": {
+        "encrypted_length": 232,
+        "original_length": 1,
+        "structure_valid": true,
+        "wrong_password_rejected": true
+      }
+    },
+    {
+      "id": "api_response",
+      "success": true,
+      "error": null,
+      "details": {
+        "encrypted_length": 740,
+        "original_length": 287,
+        "structure_valid": true,
+        "wrong_password_rejected": true
+      }
+    }
+  ],
+  "environment": {
+    "python_version": "3.13.0 (tags/v3.13.0:60403a5, Oct  7 2024, 09:38:07) [MSC v.1941 64 bit (AMD64)]",
+    "platform": "win32"
+  }
+}

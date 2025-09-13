@@ -1,0 +1,15 @@
+{
+  "name": "@maat/maat-cross-lang-crypto",
+  "version": "1.0.0",
+  "description": "Cross-language encryption package",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node tests/run-all.js",
+    "test:basic": "node tests/test.js",
+    "test:performance": "node tests/performance.test.js",
+    "test:compatibility": "node tests/compatibility.test.js"
+  },
+  "keywords": ["encryption", "crypto", "cross-language"],
+  "author": "MAAT Systems East Africa Ltd",
+  "license": "MIT"
+}

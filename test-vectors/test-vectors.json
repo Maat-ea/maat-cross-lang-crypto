@@ -1,0 +1,409 @@
+{
+  "metadata": {
+    "generated": "2024-01-15T12:00:00Z",
+    "version": "1.0.0",
+    "description": "Cross-language compatibility test vectors for encryption package",
+    "algorithm": "AES-256-GCM",
+    "kdf": "PBKDF2-SHA256",
+    "languages": ["javascript", "php", "python"],
+    "purpose": "Ensure all language implementations produce compatible encrypted data",
+    "usage": "Each language should be able to decrypt the encrypted payloads below"
+  },
+  "vectors": [
+    {
+      "id": "basic_string",
+      "description": "Simple ASCII string",
+      "input": {
+        "data": "Hello World",
+        "password": "password123",
+        "options": {
+          "iterations": 10000
+        }
+      },
+      "expected_structure": {
+        "v": "1.0.0",
+        "alg": "AES-256-GCM",
+        "kdf": "PBKDF2-SHA256",
+        "iter": 10000,
+        "field_requirements": {
+          "iv_length_bytes": 12,
+          "salt_length_bytes": 16,
+          "tag_length_bytes": 16,
+          "all_fields_base64_encoded": true
+        }
+      },
+      "validation_steps": [
+        "Decrypt the encrypted payload with given password",
+        "Verify decrypted data matches input.data exactly",
+        "Parse structure and validate required fields present",
+        "Check field lengths match expected values"
+      ]
+    },
+    {
+      "id": "json_payload",
+      "description": "JSON data structure",
+      "input": {
+        "data": "{\"user\": \"john\", \"id\": 12345, \"active\": true, \"roles\": [\"admin\", \"user\"]}",
+        "password": "json-secret-key-456",
+        "options": {
+          "iterations": 15000
+        }
+      },
+      "expected_structure": {
+        "v": "1.0.0",
+        "alg": "AES-256-GCM",
+        "kdf": "PBKDF2-SHA256",
+        "iter": 15000,
+        "field_requirements": {
+          "iv_length_bytes": 12,
+          "salt_length_bytes": 16,
+          "tag_length_bytes": 16,
+          "all_fields_base64_encoded": true
+        }
+      },
+      "validation_steps": [
+        "Decrypt and verify JSON string matches exactly",
+        "Parse JSON to ensure it's valid",
+        "Verify structure format consistency"
+      ]
+    },
+    {
+      "id": "unicode_characters",
+      "description": "Unicode and emoji characters",
+      "input": {
+        "data": "Test with ëmöjï 🔐 and ñ characters 中文 العربية русский",
+        "password": "ünïçødé-päss-🔑",
+        "options": {
+          "iterations": 12000
+        }
+      },
+      "expected_structure": {
+        "v": "1.0.0",
+        "alg": "AES-256-GCM",
+        "kdf": "PBKDF2-SHA256",
+        "iter": 12000,
+        "field_requirements": {
+          "iv_length_bytes": 12,
+          "salt_length_bytes": 16,
+          "tag_length_bytes": 16,
+          "all_fields_base64_encoded": true
+        }
+      },
+      "validation_steps": [
+        "Decrypt and verify Unicode characters preserved exactly",
+        "Check emoji and special characters intact",
+        "Verify UTF-8 encoding handled correctly"
+      ]
+    },
+    {
+      "id": "multiline_text",
+      "description": "Text with newlines and special characters",
+      "input": {
+        "data": "Line 1: Basic text\nLine 2: Special chars !@#$%^&*()\nLine 3: Quotes \"single\" and 'double'\nLine 4: Backslashes \\ and forward /\nLine 5: End of test",
+        "password": "multiline-test-key-789",
+        "options": {
+          "iterations": 20000
+        }
+      },
+      "expected_structure": {
+        "v": "1.0.0",
+        "alg": "AES-256-GCM",
+        "kdf": "PBKDF2-SHA256",
+        "iter": 20000,
+        "field_requirements": {
+          "iv_length_bytes": 12,
+          "salt_length_bytes": 16,
+          "tag_length_bytes": 16,
+          "all_fields_base64_encoded": true
+        }
+      },
+      "validation_steps": [
+        "Verify newlines preserved in decrypted text",
+        "Check all special characters intact",
+        "Ensure no character escaping issues"
+      ]
+    },
+    {
+      "id": "large_payload",
+      "description": "Larger text payload (1KB+)",
+      "input": {
+        "data": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
+        "password": "large-payload-password-key",
+        "options": {
+          "iterations": 25000
+        }
+      },
+      "expected_structure": {
+        "v": "1.0.0",
+        "alg": "AES-256-GCM",
+        "kdf": "PBKDF2-SHA256",
+        "iter": 25000,
+        "field_requirements": {
+          "iv_length_bytes": 12,
+          "salt_length_bytes": 16,
+          "tag_length_bytes": 16,
+          "all_fields_base64_encoded": true
+        }
+      },
+      "validation_steps": [
+        "Decrypt large payload and verify full content",
+        "Check performance is reasonable",
+        "Ensure no data truncation or corruption"
+      ]
+    },
+    {
+      "id": "custom_iterations",
+      "description": "Custom high iteration count",
+      "input": {
+        "data": "High security test data",
+        "password": "high-security-key-2024",
+        "options": {
+          "iterations": 100000
+        }
+      },
+      "expected_structure": {
+        "v": "1.0.0",
+        "alg": "AES-256-GCM",
+        "kdf": "PBKDF2-SHA256",
+        "iter": 100000,
+        "field_requirements": {
+          "iv_length_bytes": 12,
+          "salt_length_bytes": 16,
+          "tag_length_bytes": 16,
+          "all_fields_base64_encoded": true
+        }
+      },
+      "validation_steps": [
+        "Verify high iteration count used correctly",
+        "Check decryption still works with custom options",
+        "Ensure performance impact is acceptable"
+      ]
+    },
+    {
+      "id": "minimal_data",
+      "description": "Single character data",
+      "input": {
+        "data": "A",
+        "password": "single-char-pwd",
+        "options": {
+          "iterations": 10000
+        }
+      },
+      "expected_structure": {
+        "v": "1.0.0",
+        "alg": "AES-256-GCM",
+        "kdf": "PBKDF2-SHA256",
+        "iter": 10000,
+        "field_requirements": {
+          "iv_length_bytes": 12,
+          "salt_length_bytes": 16,
+          "tag_length_bytes": 16,
+          "all_fields_base64_encoded": true
+        }
+      },
+      "validation_steps": [
+        "Verify minimal data encrypts and decrypts correctly",
+        "Check no issues with single character",
+        "Ensure overhead is reasonable for small data"
+      ]
+    },
+    {
+      "id": "api_response",
+      "description": "Realistic API response JSON",
+      "input": {
+        "data": "{\"status\": \"success\", \"data\": {\"users\": [{\"id\": 1, \"name\": \"John Doe\", \"email\": \"john@example.com\"}, {\"id\": 2, \"name\": \"Jane Smith\", \"email\": \"jane@example.com\"}], \"pagination\": {\"page\": 1, \"per_page\": 10, \"total\": 2}}, \"timestamp\": \"2024-01-15T12:00:00Z\", \"request_id\": \"req_123456789\"}",
+        "password": "api-encryption-key-2024",
+        "options": {
+          "iterations": 50000
+        }
+      },
+      "expected_structure": {
+        "v": "1.0.0",
+        "alg": "AES-256-GCM",
+        "kdf": "PBKDF2-SHA256",
+        "iter": 50000,
+        "field_requirements": {
+          "iv_length_bytes": 12,
+          "salt_length_bytes": 16,
+          "tag_length_bytes": 16,
+          "all_fields_base64_encoded": true
+        }
+      },
+      "validation_steps": [
+        "Decrypt complex JSON structure",
+        "Parse JSON and verify all nested data intact",
+        "Check arrays and objects preserved correctly"
+      ]
+    }
+  ],
+  "cross_language_tests": [
+    {
+      "test_id": "js_to_php",
+      "description": "Encrypt in JavaScript, decrypt in PHP",
+      "vector_ids": ["basic_string", "json_payload", "unicode_characters"],
+      "expected_result": "All vectors should decrypt successfully in PHP"
+    },
+    {
+      "test_id": "php_to_python",
+      "description": "Encrypt in PHP, decrypt in Python",
+      "vector_ids": ["multiline_text", "large_payload", "api_response"],
+      "expected_result": "All vectors should decrypt successfully in Python"
+    },
+    {
+      "test_id": "python_to_js",
+      "description": "Encrypt in Python, decrypt in JavaScript",
+      "vector_ids": ["custom_iterations", "minimal_data", "basic_string"],
+      "expected_result": "All vectors should decrypt successfully in JavaScript"
+    },
+    {
+      "test_id": "round_trip",
+      "description": "Full round trip: JS → PHP → Python → JS",
+      "vector_ids": ["json_payload"],
+      "steps": [
+        "JavaScript encrypts test data",
+        "PHP decrypts and re-encrypts",
+        "Python decrypts and re-encrypts", 
+        "JavaScript decrypts final result",
+        "Verify final result matches original input"
+      ],
+      "expected_result": "Original data should be preserved through all transformations"
+    }
+  ],
+  "validation_requirements": {
+    "structure_validation": {
+      "required_fields": ["v", "alg", "kdf", "iter", "iv", "salt", "tag", "data"],
+      "field_types": {
+        "v": "string",
+        "alg": "string",
+        "kdf": "string", 
+        "iter": "integer",
+        "iv": "base64_string",
+        "salt": "base64_string",
+        "tag": "base64_string",
+        "data": "base64_string"
+      },
+      "field_values": {
+        "v": "1.0.0",
+        "alg": "AES-256-GCM",
+        "kdf": "PBKDF2-SHA256"
+      }
+    },
+    "field_length_validation": {
+      "iv_decoded_length": 12,
+      "salt_decoded_length": 16,
+      "tag_decoded_length": 16,
+      "min_iterations": 10000
+    },
+    "compatibility_requirements": [
+      "Same input should produce same structure format across languages",
+      "Encrypted data from any language should decrypt in any other language",
+      "Field lengths and encoding should be identical",
+      "Error handling should be consistent"
+    ]
+  },
+  "error_test_cases": [
+    {
+      "case_id": "empty_data",
+      "description": "Empty data input should be rejected",
+      "test_input": {
+        "data": "",
+        "password": "valid-password"
+      },
+      "expected_behavior": "Should throw error about empty data",
+      "expected_error_patterns": ["empty", "non-empty", "invalid data"]
+    },
+    {
+      "case_id": "empty_password",
+      "description": "Empty password should be rejected",
+      "test_input": {
+        "data": "valid data",
+        "password": ""
+      },
+      "expected_behavior": "Should throw error about empty password",
+      "expected_error_patterns": ["empty", "password", "non-empty"]
+    },
+    {
+      "case_id": "wrong_password_decryption",
+      "description": "Wrong password should fail decryption",
+      "test_steps": [
+        "Encrypt data with password 'correct-password'",
+        "Attempt to decrypt with password 'wrong-password'"
+      ],
+      "expected_behavior": "Should throw decryption error",
+      "expected_error_patterns": ["decryption", "failed", "authentication"]
+    },
+    {
+      "case_id": "invalid_encrypted_format",
+      "description": "Invalid base64 should be rejected",
+      "test_input": {
+        "encrypted_data": "not-valid-base64-data!!!",
+        "password": "valid-password"
+      },
+      "expected_behavior": "Should throw format error",
+      "expected_error_patterns": ["invalid", "format", "base64"]
+    },
+    {
+      "case_id": "corrupted_encrypted_data",
+      "description": "Tampered encrypted data should be rejected",
+      "test_steps": [
+        "Take valid encrypted data",
+        "Modify last 5 characters",
+        "Attempt to decrypt"
+      ],
+      "expected_behavior": "Should detect tampering and fail",
+      "expected_error_patterns": ["authentication", "failed", "corruption", "invalid"]
+    },
+    {
+      "case_id": "missing_required_fields",
+      "description": "Encrypted data missing required fields should fail",
+      "test_input": {
+        "malformed_structure": "{\"v\": \"1.0.0\", \"alg\": \"AES-256-GCM\"}",
+        "password": "valid-password"
+      },
+      "expected_behavior": "Should throw missing field error",
+      "expected_error_patterns": ["missing", "required", "field"]
+    }
+  ],
+  "performance_benchmarks": {
+    "target_metrics": {
+      "small_data_100_bytes": {
+        "max_encrypt_time_ms": 50,
+        "max_decrypt_time_ms": 50
+      },
+      "medium_data_1kb": {
+        "max_encrypt_time_ms": 100,
+        "max_decrypt_time_ms": 100  
+      },
+      "large_data_10kb": {
+        "max_encrypt_time_ms": 200,
+        "max_decrypt_time_ms": 200
+      }
+    },
+    "iteration_impact": {
+      "10000_iterations": "baseline performance",
+      "50000_iterations": "~5x slower than baseline",
+      "100000_iterations": "~10x slower than baseline"
+    }
+  },
+  "usage_examples": {
+    "basic_usage": {
+      "description": "How to use test vectors for validation",
+      "steps": [
+        "Load test vector JSON file",
+        "For each vector, use input.data and input.password to encrypt",
+        "Compare your encrypted structure format with expected_structure",
+        "Decrypt your encrypted data and verify it matches input.data",
+        "Run cross-language tests by sharing encrypted data"
+      ]
+    },
+    "integration_testing": {
+      "description": "How to use for integration testing",
+      "steps": [
+        "Generate encrypted data in Language A using test vectors",
+        "Pass encrypted data to Language B for decryption",
+        "Verify decrypted data matches original test vector input",
+        "Repeat for all language combinations"
+      ]
+    }
+  }
+}
