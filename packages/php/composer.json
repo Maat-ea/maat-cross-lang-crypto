@@ -25,7 +25,7 @@
     ],
     "support": {
         "issues": "https://github.com/Maat-ea/maat-cross-lang-crypto/issues",
-        "source": "https://github.com/Maat-ea/maat-cross-lang-crypto",
+        "source": "https://github.com/Maat-ea/maat-cross-lang-crypto/tree/master/packages/php",
         "docs": "https://github.com/Maat-ea/maat-cross-lang-crypto/blob/main/README.md"
     },
     "require": {
