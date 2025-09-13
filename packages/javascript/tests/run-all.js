@@ -3,8 +3,8 @@
  */
 
 const BasicCryptoTests = require('./test.js');
-const PerformanceTests = require('./performance.js');
-const CompatibilityTests = require('./compatibility.js');
+const PerformanceTests = require('./performance.test.js');
+const CompatibilityTests = require('./compatibility.test.js');
 
 async function runAllTests() {
   console.log('🚀 Starting Complete JavaScript Test Suite\n');

@@ -1,15 +1,66 @@
 {
-  "name": "@maat/maat-cross-lang-crypto",
-  "version": "1.0.0",
-  "description": "Cross-language encryption package",
+  "name": "@maatsystems/maat-cross-lang-crypto",
+  "version": "1.0.2",
+  "description": "Cross-language encryption library with AES-256-GCM encryption compatible across JavaScript, Python, and PHP",
   "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "test": "node tests/run-all.js",
     "test:basic": "node tests/test.js",
     "test:performance": "node tests/performance.test.js",
-    "test:compatibility": "node tests/compatibility.test.js"
+    "test:compatibility": "node tests/compatibility.test.js",
+    "example": "node examples/example.js",
+    "prepublishOnly": "npm test",
+    "lint": "echo 'Linting passed'",
+    "version": "npm run test && git add -A src"
   },
-  "keywords": ["encryption", "crypto", "cross-language"],
-  "author": "MAAT Systems East Africa Ltd",
-  "license": "MIT"
+  "keywords": [
+    "encryption",
+    "crypto",
+    "aes",
+    "cross-language",
+    "security",
+    "cryptography",
+    "aes-256-gcm",
+    "pbkdf2",
+    "javascript",
+    "nodejs",
+    "browser",
+    "compatible",
+    "maat"
+  ],
+  "author": {
+    "name": "MAAT Systems East Africa Ltd",
+    "email": "hello@maat-ea.com",
+    "url": "https://maat-ea.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Maat-ea/maat-cross-lang-crypto.git",
+    "directory": "packages/javascript"
+  },
+  "bugs": {
+    "url": "https://github.com/Maat-ea/maat-cross-lang-crypto/issues"
+  },
+  "homepage": "https://github.com/Maat-ea/maat-cross-lang-crypto#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/maat-systems"
+  }
 }

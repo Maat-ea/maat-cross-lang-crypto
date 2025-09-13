@@ -14,3 +14,76 @@
     "ext-json": "*"
   }
 }
+
+{
+    "name": "maatsystems/maat-cross-lang-crypto",
+    "description": "Cross-language encryption library with AES-256-GCM encryption compatible across JavaScript, Python, and PHP",
+    "keywords": [
+        "encryption",
+        "crypto",
+        "aes",
+        "cross-language",
+        "security",
+        "cryptography",
+        "aes-256-gcm",
+        "pbkdf2",
+        "php"
+    ],
+    "homepage": "https://github.com/Maat-ea/maat-cross-lang-crypto",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "MAAT Systems East Africa Ltd",
+            "email": "hello@maat-ea.com",
+            "homepage": "https://maat-ea.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/Maat-ea/maat-cross-lang-crypto/issues",
+        "source": "https://github.com/Maat-ea/maat-cross-lang-crypto",
+        "docs": "https://github.com/Maat-ea/maat-cross-lang-crypto/blob/main/README.md"
+    },
+    "require": {
+        "php": ">=7.4",
+        "ext-openssl": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0|^10.0",
+        "phpstan/phpstan": "^1.0",
+        "squizlabs/php_codesniffer": "^3.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "MAAT\\Crypto\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MAAT\\Crypto\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "php tests/run-all.php",
+        "test:unit": "phpunit tests/",
+        "test:compatibility": "php tests/CompatibilityTest.php",
+        "test:performance": "php tests/PerformanceTest.php",
+        "analyse": "phpstan analyse src --level=8",
+        "style:check": "phpcs src --standard=PSR12",
+        "style:fix": "phpcbf src --standard=PSR12"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.x-dev"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

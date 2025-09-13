@@ -1,0 +1,143 @@
+# .npmignore
+# Files to exclude from npm package
+
+# Development files
+tests/
+examples/
+docs/
+scripts/
+.vscode/
+.idea/
+*.code-workspace
+
+# Git files
+.git/
+.gitignore
+.gitattributes
+.github/
+
+# Environment and config files
+.env*
+.npmrc
+.nvmrc
+config/
+*.config.js
+*.config.json
+
+# Build and dependency files
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.swp
+*.swo
+*~
+.cache/
+
+# Coverage and test reports
+coverage/
+.nyc_output/
+test-results/
+junit.xml
+*.lcov
+
+# Documentation generation
+*.html
+jsdoc/
+typedoc/
+
+# IDE specific files
+*.sublime-project
+*.sublime-workspace
+.idea/
+.vscode/settings.json
+.vscode/launch.json
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Development scripts
+dev/
+tools/
+scripts/publish.sh
+scripts/test.sh
+
+# Validation and test data
+test-vectors/
+validation-reports/
+benchmark-results/
+performance-logs/
+
+# Docker files
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# CI/CD files
+.travis.yml
+.circleci/
+.github/workflows/
+azure-pipelines.yml
+jenkins/
+.gitlab-ci.yml
+
+# Linting and formatting
+.eslintrc*
+.prettierrc*
+.stylelintrc*
+.editorconfig
+
+# TypeScript compilation
+tsconfig*.json
+*.tsbuildinfo
+
+# Rollup/Webpack/Bundler configs
+rollup.config.js
+webpack.config.js
+babel.config.js
+jest.config.js
+
+# Security scanning
+.snyk
+.semgrepignore
+
+# Local development
+local/
+dev-notes.md
+TODO.md
+NOTES.md
+
+# Don't include source maps
+*.map
+
+# Exclude specific large or unnecessary files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Version control
+.hg/
+.svn/
+.bzr/
